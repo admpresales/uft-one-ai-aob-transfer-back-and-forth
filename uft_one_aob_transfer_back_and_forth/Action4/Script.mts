@@ -3,8 +3,9 @@
 '===========================================================================================
 'BP:  Get current balance from primary account
 '===========================================================================================
-
+AIUtil.RunSettings.OCR.UseConfigSet UFT_OCR
 CurrentBalance = split(AIUtil.FindTextBlock(micAnyText, micWithAnchorOnRight, AIUtil("check_mark", micAnyText, micWithAnchorOnRight, AIUtil("button", "NEW TRANSFER", micFromTop, 1))).GetValue)
+AIUtil.RunSettings.OCR.UseConfigSet AI_OCR
 'Force the variable to become a number instead of text
 CurrentBalance(0) = CurrentBalance(0) + 1 - 1
 print "The current balance is " & CurrentBalance(0)
@@ -34,7 +35,9 @@ AIUtil("button", "SEND").Click
 'BP:  Verify balance in primary account has decreased
 '===========================================================================================
 'Have to parse out the appended text of USD
+AIUtil.RunSettings.OCR.UseConfigSet UFT_OCR
 NewBalance = split(AIUtil.FindTextBlock(micAnyText, micWithAnchorAbove, AIUtil.FindTextBlock("Net Balance")).GetValue, " ")
+AIUtil.RunSettings.OCR.UseConfigSet AI_OCR
 'Force the variable to become a number instead of text
 NewBalance(0) = NewBalance(0) + 1 - 1
 print "The new balance is " & NewBalance(0)
